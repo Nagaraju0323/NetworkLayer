@@ -18,7 +18,7 @@ class LanguagesViewModel {
         apiRequest.get(url: URL(string:"https://sevenchats.com/auth/languages")!, type:Languges.self, completion: { response in
             switch(response){
             case .success(let data):
-                print(data.data)
+//                print(data.data)
                 self.language  = data.data
             case .failure(let error):
                 print(error)

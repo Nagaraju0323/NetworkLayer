@@ -73,3 +73,5 @@ extension URLRequest {
 public protocol RequestAdapter {
     func adapt(_ urlRequest: URLRequest) throws -> URLRequest
 }
+
+    

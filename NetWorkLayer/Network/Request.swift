@@ -19,27 +19,28 @@ import Combine
  */
 
 
-protocol Request{
-     func request(_ url: URLConvertible,method: HTTPMethod,parameters: Parameters?,
-        encoding: ParameterEncoder,
-        headers: HTTPHeaders?)
-        -> URLRequest
-}
+var originalRequest: URLRequest?
+var resultURLRequest:URLRequest?
 
-open class SessionManager:Request {
-    
+open class SessionManager {
+
+    var originalRequest: URLRequest?
     @discardableResult
     open func request(_ url: URLConvertible,method: HTTPMethod = .get,parameters: Parameters? = nil,encoding: ParameterEncoder = URLEncoding.default,
                       headers: HTTPHeaders? = nil)
         -> URLRequest
     {
-        var originalRequest: URLRequest?
+
         do {
             originalRequest = try? URLRequest(url: url, method: method, headers: headers)
             let encodedURLRequest = try encoding.encode(urlRequest: &originalRequest!, with:parameters)
+            resultURLRequest = try! encodedURLRequest.asURLRequest()
             return try! encodedURLRequest.asURLRequest()
+            
         } catch {
             return originalRequest!
         }
     }
+    
+    
 }
