@@ -8,19 +8,12 @@
 import UIKit
 
 class ViewController: UIViewController {
-    
-  
-    
-
+   
     let viewModel = LanguagesViewModel()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.load()
-        
-        
     }
-
 
 }
 

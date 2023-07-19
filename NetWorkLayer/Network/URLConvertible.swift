@@ -29,7 +29,7 @@ extension URLComponents: URLConvertible {
     }
 }
 
-// MARK: -
+// MARK: - URLRequestConvertible
 
 public protocol URLRequestConvertible {
     func asURLRequest() throws -> URLRequest
@@ -45,7 +45,7 @@ extension URLRequest: URLRequestConvertible {
     public func asURLRequest() throws -> URLRequest { return self }
 }
 
-// MARK: -
+// MARK: - HTTPHeaders
 
 public typealias HTTPHeaders = [String: String]
 
@@ -54,9 +54,7 @@ extension URLRequest {
         let url = try url.asURL()
 
         self.init(url: url)
-
         httpMethod = method.rawValue
-
         if let headers = headers {
             for (headerField, headerValue) in headers {
                 setValue(headerValue, forHTTPHeaderField: headerField)
@@ -71,9 +69,7 @@ extension URLRequest {
 }
 
 
-
 /// A type that can inspect and optionally adapt a `URLRequest` in some manner if necessary.
 public protocol RequestAdapter {
-  
     func adapt(_ urlRequest: URLRequest) throws -> URLRequest
 }

@@ -42,9 +42,7 @@ public struct URLEncoding: ParameterEncoder {
             urlRequest.setValue("application/x-www-form-urlencoded; charset=utf-8", forHTTPHeaderField: "Content-Type")
         }
         return urlRequest
-        
     }
-    
     
 }
 

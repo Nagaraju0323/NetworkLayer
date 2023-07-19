@@ -6,6 +6,13 @@
 //
 
 import Foundation
+
+/**
+ * Used for HTTPMethod
+ *
+ * - parameter POST:GET: DELTE:PUT Methods
+ * - parameter isPost: if api is post than enter true
+ */
 public enum HTTPMethod: String {
     case options = "OPTIONS"
     case get     = "GET"
