@@ -54,6 +54,7 @@ class HTTPClient:APIRequest {
     }
 }
 
+
 ////MARK: - ResponseHandlerDelegate
 protocol ResponseHandlerDelegate{
     func respHandler(url: URLRequest,completion: @escaping(Result<Data,ErrorHandling>) -> Void)
