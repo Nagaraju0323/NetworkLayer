@@ -14,17 +14,23 @@ class LanguagesViewModel {
     }
     var language = [Datum]()
     
-    func load() {
+    func load(completion:@escaping() -> Void) {
         apiRequest.get(url: URL(string:"https://sevenchats.com/auth/languages")!, type:Languges.self, completion: { response in
-            switch(response){
-            case .success(let data):
-//                print(data.data)
-                self.language  = data.data
-            case .failure(let error):
-                print(error)
-                
+            print(response)
+            DispatchQueue.main.async {
+                switch(response){
+                case .success(let data):
+                    self.language  = data.data
+                    completion()
+                case .failure(let error):
+                    print(error)
+                    
+                }
             }
+            
         })
         
     }
 }
+
+//https://sevenchats.com/admin/likes/v1/add

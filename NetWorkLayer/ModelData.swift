@@ -11,7 +11,7 @@ struct Languges: Codable {
     let meta: Meta
 }
 
-// MARK: - Datum
+//// MARK: - Datum
 struct Datum: Codable {
     let langID, langName, langCode, orientation: String
     let statusID: String
@@ -25,7 +25,27 @@ struct Datum: Codable {
     }
 }
 
-// MARK: - Meta
+//// MARK: - Meta
+//// MARK: - Welcome
+//struct Languges: Codable {
+//    let data: [Datum]
+//    let meta: Meta
+//}
+//
+//// MARK: - Datum
+//struct Datum: Codable {
+//    let userID, elementID, isLiked, likes: String
+//
+//    enum CodingKeys: String, CodingKey {
+//        case userID = "user_id"
+//        case elementID = "element_id"
+//        case isLiked = "is_liked"
+//        case likes
+//    }
+//}
+//
+//// MARK: - Meta
 struct Meta: Codable {
     let status, message: String
 }
+

@@ -7,6 +7,12 @@
 
 import Foundation
 
+/**
+ * Used for URLConvertible
+ * - parameter URL:Convert to Response to URL
+ * - parameter ErrorHandling: Error handling
+ */
+
 public protocol URLConvertible {
     func asURL() throws -> URL
 }
@@ -30,6 +36,11 @@ extension URLComponents: URLConvertible {
 }
 
 // MARK: - URLRequestConvertible
+/**
+ * Used for URLRequestConvertible
+ * - parameter asURLRequest:Convert  URL to URLRequest
+ * - parameter Error: Error To Handling 
+ */
 
 public protocol URLRequestConvertible {
     func asURLRequest() throws -> URLRequest
@@ -46,6 +57,13 @@ extension URLRequest: URLRequestConvertible {
 }
 
 // MARK: - HTTPHeaders
+/**
+ * Used for HTTPHeaders
+ * - parameter URLConvertible:Convert to Response to URLReuest
+ * - parameter HTTPMethod: handling the HTTPMethods
+ * - parameter HTTPHeaders: conveted Header
+ */
+
 
 public typealias HTTPHeaders = [String: String]
 

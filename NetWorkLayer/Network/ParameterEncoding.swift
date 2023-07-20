@@ -1,9 +1,16 @@
 //
 //  ParameterEncoding.swift
 //  NetWorkLayer
-//
 //  Created by Nagaraju on 11/07/23.
-//
+
+/**
+ * Used for ParameterEncoding
+ * - parameter Parameters: Containes the Parameters to Encoding
+ * - parameter urlRequest: used for URLRequest
+ * - parameter `default`:  default URLEcoding
+ * - parameter `JSONParameterEncoder`:  default  Json To parameter Encoding values
+ * - parameter `ParameterEncoder`:  default  Json To parameter Encoding values
+ */
 
 import Foundation
 
@@ -19,7 +26,6 @@ public struct URLEncoding: ParameterEncoder {
     public static var `default`: URLEncoding { return URLEncoding() }
     
     public func encode(urlRequest: inout URLRequest, with parameters: Parameters?) throws -> URLRequest {
-        
         
         guard let parameters = parameters else { return urlRequest }
         
@@ -51,20 +57,30 @@ public struct JSONParameterEncoder: ParameterEncoder {
     public static var `default`: JSONParameterEncoder { return JSONParameterEncoder() }
     
     public func encode(urlRequest: inout URLRequest, with parameters: Parameters?) throws  -> URLRequest {
+        
+        guard let parameters = parameters else { return urlRequest }
+        
         do {
-            let jsonAsData = try JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+            
+            let jsonAsData = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+        
             urlRequest.httpBody = jsonAsData
+            
             if urlRequest.value(forHTTPHeaderField: "Content-Type") == nil {
+                
                 urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
             }
             return urlRequest
         }catch {
             throw NetworkError.encodingFailed
         }
-        
     }
 }
 
+/**
+ * Used for NetworkError
+ * - parameter Error: handling all Error Shwo Failiure cases
+ */
 
 
 public enum NetworkError : String, Error {
