@@ -14,7 +14,6 @@ import Foundation
 // protocol DataRequest {
 //     func respHandler(completion:@escaping(Result<Data,ErrorHandling>) -> Void)
 //}
-
 /**
  * Used for Json Serilization
  * - parameter Data:Convert to Response to Data
@@ -36,7 +35,6 @@ extension URLRequestConvertible {
                 }else {
                     completion(.failure(.authenticationError))
                 }
-                
             }
         }).resume()
     }

@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 class LanguagesViewModel {
     let apiRequest : APIRequest
     init(apiRequest: APIRequest = HTTPClient()) {
@@ -14,23 +15,23 @@ class LanguagesViewModel {
     }
     var language = [Datum]()
     
-    func load(completion:@escaping() -> Void) {
-        apiRequest.get(url: URL(string:"https://sevenchats.com/auth/languages")!, type:Languges.self, completion: { response in
-            print(response)
-            DispatchQueue.main.async {
+    enum Results:Equatable{
+       case successMsg([Datum])
+       case failures(ErrorHandling)
+    }
+ 
+    func load(completion:@escaping(Results) -> Void) {
+        apiRequest.get(url: URL(string:"https://sevenchats.com/auth/languages")!, type:Languges.self,method:.get, completion: {  [weak self] response in
+            guard self != nil else { return}
                 switch(response){
                 case .success(let data):
-                    self.language  = data.data
-                    completion()
+                    self?.language  = data.data
+                    completion(.successMsg(data.data))
                 case .failure(let error):
-                    print(error)
-                    
+                let result =  (error == ErrorHandling.InvalidData) ? completion(.failures(.InvalidData)) : completion(.failures(.Connectivity))
                 }
-            }
-            
         })
         
     }
 }
 
-//https://sevenchats.com/admin/likes/v1/add

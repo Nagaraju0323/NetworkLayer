@@ -12,12 +12,13 @@ class HomeView: UIViewController {
     let viewModel = LanguagesViewModel()
     @IBOutlet weak var tblLanguges:UITableView!
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        viewModel.load(){
-            self.tblLanguges.reloadData()
+        viewModel.load(){ response in
+            DispatchQueue.main.async {
+                self.tblLanguges.reloadData()
+            }
+            
         }
     }
 }
