@@ -57,7 +57,6 @@ class HTTPClient:APIRequest {
     }
 }
 
-
 protocol ResponseHandlerDelegate {
     func fetchModel<T: Codable>(type: T.Type, data: Data, completion: (Result<T, ErrorHandling>) -> Void)
 }
