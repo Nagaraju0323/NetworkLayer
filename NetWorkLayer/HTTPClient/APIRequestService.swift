@@ -8,6 +8,14 @@
 import Foundation
 
 
+enum Results {
+   case successMsg([Datum])
+   case failures(ErrorHandling)
+}
+
+//extension Results: Equatable where Error: Equatable {}
+
+
 class LanguagesViewModel {
     let apiRequest : APIRequest
     init(apiRequest: APIRequest = HTTPClient()) {
@@ -15,21 +23,25 @@ class LanguagesViewModel {
     }
     var language = [Datum]()
     
-    enum Results:Equatable{
-       case successMsg([Datum])
-       case failures(ErrorHandling)
-    }
+    public typealias Result = Results
+   
+    
+   
  
-    func load(completion:@escaping(Results) -> Void) {
+    func load(completion:@escaping(Result) -> Void) {
         apiRequest.get(url: URL(string:"https://sevenchats.com/auth/languages")!, type:Languges.self,method:.get, completion: {  [weak self] response in
             guard self != nil else { return}
+            DispatchQueue.main.async {
                 switch(response){
                 case .success(let data):
                     self?.language  = data.data
                     completion(.successMsg(data.data))
                 case .failure(let error):
-                let result =  (error == ErrorHandling.InvalidData) ? completion(.failures(.InvalidData)) : completion(.failures(.Connectivity))
+                    let result =  (error == ErrorHandling.InvalidData) ? completion(.failures(.InvalidData)) : completion(.failures(.Connectivity))
                 }
+                
+            }
+            
         })
         
     }

@@ -101,7 +101,7 @@ final class TestCasesNetwork: XCTestCase {
         let url = URL(string: "http://any-url.com")!
         let client = HTTPClient()
         var sut: LanguagesViewModel? = LanguagesViewModel(apiRequest: client)
-        var captureResult = [LanguagesViewModel.Results]()
+        var captureResult = [LanguagesViewModel.Result]()
         sut?.load { captureResult.append ($0) }
         sut = nil
         client.createWithStatus(withStatus: 200, data: makeItemsJSON([]))
@@ -174,13 +174,39 @@ final class TestCasesNetwork: XCTestCase {
     
    
     //MARK: Expect Helper
-    func expect(sut:LanguagesViewModel,toCompleteWitherro Result: LanguagesViewModel.Results, when action:() ->Void,file:StaticString = #file,line:Int=#line){
-        var captureError = [LanguagesViewModel.Results]()
-        sut.load{ captureError.append($0)}
-        action()
-        XCTAssertEqual(captureError, [Result])
+//    func expect(sut:LanguagesViewModel,toCompleteWitherro Result: LanguagesViewModel.Results, when action:() ->Void,file:StaticString = #file,line:Int=#line){
+//        var captureError = [LanguagesViewModel.Results]()
+//        sut.load{ captureError.append($0)}
+//        action()
+//        XCTAssertEqual(captureError, [Result])
+//    }
+//MARK: Modified the Helper
+    
+    func expect(sut:LanguagesViewModel,toCompleteWitherro expectedResult: LanguagesViewModel.Result, when action:() ->Void,file:StaticString = #file,line:Int=#line){
+//        var captureError = [LanguagesViewModel.Results]()
+        let exp = expectation (description: "Wait for load completion")
         
+        sut.load{ receivedResult in
+            switch (receivedResult,expectedResult) {
+            case let (.successMsg(receivedItems),.successMsg(expectedItems)):
+                XCTAssertEqual(receivedItems,expectedItems)
+            case let (.failures(receivedError), .failures (expectedError)) :
+                
+                XCTAssertEqual(receivedError,expectedError)
+            default:
+                
+                XCTFail("Expected result \(expectedResult) got \(receivedResult) instead", file: file,line:UInt(line))
+                
+            }
+            exp.fulfill ()
+            
+        }
+        action()
+        wait(for: [exp], timeout: 1.0)
+        
+//        XCTAssertEqual(captureError, [Result])
     }
+    
     
     private class HTTPClient:APIRequest {
         

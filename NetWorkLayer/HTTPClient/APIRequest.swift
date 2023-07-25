@@ -23,6 +23,7 @@ protocol APIRequest {
     func get(url: URL,type: Languges.Type,method:HTTPMethod,completion:@escaping(Result<Languges,ErrorHandling>) -> Void)
 }
 
+
 //MARK:- HTTPClient
 class HTTPClient:APIRequest {
     
