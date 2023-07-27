@@ -26,15 +26,19 @@ extension URLRequestConvertible {
         guard let urlRequest = resultURLRequest else { return }
         URLSession.shared.dataTask(with: urlRequest, completionHandler: { data,response,error in
             if let httpResponse = response as? HTTPURLResponse {
-                if httpResponse.statusCode == 200{
-                    if let data = data,error == nil{
-                        completion(.success(data))
-                    }else {
-                        completion(.failure(.noData))
-                    }
-                }else {
-                    completion(.failure(.authenticationError))
+                
+                switch (httpResponse.statusCode){
+                case 500..<600:
+                    completion(.failure(.ServicerErrorBadGateway))
+                case 200:
+                    guard let data = data,error == nil  else { return completion(.failure(.noData)) }
+                    completion(.success(data))
+                case 401,400:
+                    completion(.failure(.BadRequest))
+                    
+                default: print("Error")
                 }
+
             }
         }).resume()
     }

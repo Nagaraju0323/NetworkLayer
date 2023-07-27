@@ -166,12 +166,12 @@ final class TestCasesNetwork: XCTestCase {
     }
     
     
-    private func trackForMemoryLeaks(_ instance: AnyObject, file: StaticString = #file, line: UInt = #line) {
-        addTeardownBlock { [weak instance] in
-            XCTAssertNil (instance,"Instance should have been deallocated. Potential memory leak.", file: file,line: line)
-        }
-    }
-    
+//    private func trackForMemoryLeaks(_ instance: AnyObject, file: StaticString = #file, line: UInt = #line) {
+//        addTeardownBlock { [weak instance] in
+//            XCTAssertNil (instance,"Instance should have been deallocated. Potential memory leak.", file: file,line: line)
+//        }
+//    }
+//    
    
     //MARK: Expect Helper
 //    func expect(sut:LanguagesViewModel,toCompleteWitherro Result: LanguagesViewModel.Results, when action:() ->Void,file:StaticString = #file,line:Int=#line){
@@ -212,13 +212,13 @@ final class TestCasesNetwork: XCTestCase {
         
         var error:Error?
         
-        var message = [(url: URL, type: Languges.Type, method: HTTPMethod, completion: (Result<Languges, ErrorHandling>) -> Void)]()
+        var message = [(url: URL, type: Languges.Type, method: HTTPMethods, completion: (Result<Languges, ErrorHandling>) -> Void)]()
      
         var urlRequest: [URL]{
             return message.map{$0.url }
         }
 
-        func get(url: URL, type:Languges.Type, method: HTTPMethod, completion: @escaping (Result<Languges, ErrorHandling>) -> Void) {
+        func get(url: URL, type:Languges.Type, method: HTTPMethods, completion: @escaping (Result<Languges, ErrorHandling>) -> Void) {
             message.append((url,type,method,completion))
         }
         

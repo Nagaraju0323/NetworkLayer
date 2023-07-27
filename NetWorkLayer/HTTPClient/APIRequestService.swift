@@ -17,10 +17,12 @@ enum Results {
 
 
 class LanguagesViewModel {
+    
     let apiRequest : APIRequest
-    init(apiRequest: APIRequest = HTTPClient()) {
+    init(apiRequest: APIRequest = APIRequestService()) {
         self.apiRequest = apiRequest
     }
+ 
     var language = [Datum]()
     
     public typealias Result = Results

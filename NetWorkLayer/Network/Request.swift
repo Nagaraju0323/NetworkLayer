@@ -26,7 +26,7 @@ open class SessionManager {
     
     var originalRequest: URLRequest?
     @discardableResult
-    open func request(_ url: URLConvertible,method: HTTPMethod = .get,parameters: Parameters? = nil,encoding: ParameterEncoder = URLEncoding.default,
+    open func request(_ url: URLConvertibles,method: HTTPMethods = .get,parameters: Parameters? = nil,encoding: ParameterEncoders = URLEncoding.default,
                       headers: HTTPHeaders? = nil)
     -> URLRequest
     {

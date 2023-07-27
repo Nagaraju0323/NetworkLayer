@@ -1,5 +1,5 @@
 //
-//  URLConvertible.swift
+//  URLConvertibles.swift
 //  NetWorkLayer
 //
 //  Created by Nagaraju on 11/07/23.
@@ -8,27 +8,27 @@
 import Foundation
 
 /**
- * Used for URLConvertible
+ * Used for URLConvertibles
  * - parameter URL:Convert to Response to URL
  * - parameter ErrorHandling: Error handling
  */
 
-public protocol URLConvertible {
+public protocol URLConvertibles {
     func asURL() throws -> URL
 }
 
-extension String: URLConvertible {
+extension String: URLConvertibles {
     public func asURL() throws -> URL {
         guard let url = URL(string: self) else { throw URLRequestErrorHandling.invalidURL(url: self) }
         return url
     }
 }
 
-extension URL: URLConvertible {
+extension URL: URLConvertibles {
     public func asURL() throws -> URL { return self }
 }
 
-extension URLComponents: URLConvertible {
+extension URLComponents: URLConvertibles {
     public func asURL() throws -> URL {
         guard let url = url else { throw URLRequestErrorHandling.invalidURL(url: self) }
         return url
@@ -59,7 +59,7 @@ extension URLRequest: URLRequestConvertible {
 // MARK: - HTTPHeaders
 /**
  * Used for HTTPHeaders
- * - parameter URLConvertible:Convert to Response to URLReuest
+ * - parameter URLConvertibles:Convert to Response to URLReuest
  * - parameter HTTPMethod: handling the HTTPMethods
  * - parameter HTTPHeaders: conveted Header
  */
@@ -68,7 +68,7 @@ extension URLRequest: URLRequestConvertible {
 public typealias HTTPHeaders = [String: String]
 
 extension URLRequest {
-    public init(url: URLConvertible, method: HTTPMethod, headers: HTTPHeaders? = nil) throws {
+    public init(url: URLConvertibles, method: HTTPMethods, headers: HTTPHeaders? = nil) throws {
         let url = try url.asURL()
 
         self.init(url: url)

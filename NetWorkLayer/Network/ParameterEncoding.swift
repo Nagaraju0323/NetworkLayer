@@ -8,8 +8,8 @@
  * - parameter Parameters: Containes the Parameters to Encoding
  * - parameter urlRequest: used for URLRequest
  * - parameter `default`:  default URLEcoding
- * - parameter `JSONParameterEncoder`:  default  Json To parameter Encoding values
- * - parameter `ParameterEncoder`:  default  Json To parameter Encoding values
+ * - parameter `JSONParameterEncoders`:  default  Json To parameter Encoding values
+ * - parameter `ParameterEncoders`:  default  Json To parameter Encoding values
  */
 
 import Foundation
@@ -17,11 +17,11 @@ import Foundation
 
 public typealias Parameters = [String:Any]
 
-public protocol ParameterEncoder {
+public protocol ParameterEncoders {
     func encode(urlRequest: inout URLRequest, with parameters: Parameters?) throws -> URLRequest
 }
 
-public struct URLEncoding: ParameterEncoder {
+public struct URLEncoding: ParameterEncoders {
     
     public static var `default`: URLEncoding { return URLEncoding() }
     public func encode(urlRequest: inout URLRequest, with parameters: Parameters?) throws -> URLRequest {
@@ -48,9 +48,9 @@ public struct URLEncoding: ParameterEncoder {
     
 }
 
-public struct JSONParameterEncoder: ParameterEncoder {
+public struct JSONParameterEncoders: ParameterEncoders {
     
-    public static var `default`: JSONParameterEncoder { return JSONParameterEncoder() }
+    public static var `default`: JSONParameterEncoders { return JSONParameterEncoders() }
     public func encode(urlRequest: inout URLRequest, with parameters: Parameters?) throws  -> URLRequest {
         guard let parameters = parameters else { return urlRequest }
         do {

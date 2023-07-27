@@ -17,15 +17,35 @@ public enum ErrorHandling:Swift.Error{
     case unableToDecode
     case Connectivity
     case InvalidData
+    case ServicerErrorBadGateway
+    case BadRequest
 }
 
 protocol APIRequest {
-    func get(url: URL,type: Languges.Type,method:HTTPMethod,completion:@escaping(Result<Languges,ErrorHandling>) -> Void)
+    
+    func get(url: URL,type: Languges.Type,method:HTTPMethods,completion:@escaping(Result<Languges,ErrorHandling>) -> Void)
+    
+    
+    
 }
 
 
+class APIRequestService:APIRequest{
+    
+    func get(url: URL,type: Languges.Type,method:HTTPMethods,completion:@escaping(Result<Languges,ErrorHandling>) -> Void){
+        HTTPClient().get(url: url, type: type.self, method: method, completion: completion)
+    }
+    
+}
+
+
+
+
+
+
+
 //MARK:- HTTPClient
-class HTTPClient:APIRequest {
+class HTTPClient {
     
     var sessionManager = SessionManager()
     var responseHandlerDelegate : ResponseHandlerDelegate
@@ -35,10 +55,10 @@ class HTTPClient:APIRequest {
         self.responseHandlerDelegate = responseHandlerDelegate
     }
     var urlRequest: URL?
-    func get<T:Codable>(url: URL,type: T.Type,method:HTTPMethod,completion:@escaping(Result<T,ErrorHandling>) -> Void) {
+    func get<T:Codable>(url: URL,type: T.Type,method:HTTPMethods,completion:@escaping(Result<T,ErrorHandling>) -> Void) {
         urlRequest = url
         let header = ["Authorization": "Bearer a57e4291e388d6c42cab70875b08750e6ec7755f", "language": "1", "Content-Type": "application/json", "Accept-Language": "en", "Accept": "application/json"]
-        sessionManager.request(url,method: method,parameters: nil,encoding: JSONParameterEncoder.default, headers: header).responseJSON{ response in
+        sessionManager.request(url,method: method,parameters: nil,encoding: JSONParameterEncoders.default, headers: header).responseJSON{ response in
             switch response{
             case .success(let data):
                 self.responseHandlerDelegate.fetchModel(type: type, data: data){ response in

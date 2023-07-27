@@ -13,7 +13,7 @@ import Foundation
  * - parameter POST:GET: DELTE:PUT Methods
  * - parameter isPost: if api is post than enter true
  */
-public enum HTTPMethod: String {
+public enum HTTPMethods: String {
     case options = "OPTIONS"
     case get     = "GET"
     case head    = "HEAD"
@@ -27,6 +27,6 @@ public enum HTTPMethod: String {
 
 
 public enum URLRequestErrorHandling:Error{
-    case invalidURL(url: URLConvertible)
+    case invalidURL(url: URLConvertibles)
     case badRequest
 }
