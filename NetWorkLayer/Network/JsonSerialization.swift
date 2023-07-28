@@ -35,6 +35,14 @@ extension URLRequestConvertible {
                     completion(.success(data))
                 case 401,400:
                     completion(.failure(.BadRequest))
+                case 201:
+                    do{
+                        let jsonAsData = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String:AnyObject]
+                        print(jsonAsData)
+                    }catch{
+                        print("Errohadling")
+                    }
+                    
                     
                 default: print("Error")
                 }

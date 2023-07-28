@@ -54,7 +54,7 @@ public struct JSONParameterEncoders: ParameterEncoders {
     public func encode(urlRequest: inout URLRequest, with parameters: Parameters?) throws  -> URLRequest {
         guard let parameters = parameters else { return urlRequest }
         do {
-            let jsonAsData = try? JSONSerialization.data(withJSONObject: parameters, options: .prettyPrinted)
+            let jsonAsData = try? JSONSerialization.data(withJSONObject: parameters, options: [])
             urlRequest.httpBody = jsonAsData
             if urlRequest.value(forHTTPHeaderField: "Content-Type") == nil {
                 urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")

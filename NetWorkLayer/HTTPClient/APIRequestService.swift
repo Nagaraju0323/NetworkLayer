@@ -9,7 +9,7 @@ import Foundation
 
 
 enum Results {
-   case successMsg([Datum])
+   case successMsg([Languges])
    case failures(ErrorHandling)
 }
 
@@ -23,7 +23,7 @@ class LanguagesViewModel {
         self.apiRequest = apiRequest
     }
  
-    var language = [Datum]()
+    var language = [Languges]()
     
     public typealias Result = Results
    
@@ -36,8 +36,8 @@ class LanguagesViewModel {
             DispatchQueue.main.async {
                 switch(response){
                 case .success(let data):
-                    self?.language  = data.data
-                    completion(.successMsg(data.data))
+                    self?.language  = [data]
+                    completion(.successMsg([data]))
                 case .failure(let error):
                     let result =  (error == ErrorHandling.InvalidData) ? completion(.failures(.InvalidData)) : completion(.failures(.Connectivity))
                 }

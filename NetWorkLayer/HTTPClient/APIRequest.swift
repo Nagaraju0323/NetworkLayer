@@ -57,8 +57,18 @@ class HTTPClient {
     var urlRequest: URL?
     func get<T:Codable>(url: URL,type: T.Type,method:HTTPMethods,completion:@escaping(Result<T,ErrorHandling>) -> Void) {
         urlRequest = url
-        let header = ["Authorization": "Bearer a57e4291e388d6c42cab70875b08750e6ec7755f", "language": "1", "Content-Type": "application/json", "Accept-Language": "en", "Accept": "application/json"]
-        sessionManager.request(url,method: method,parameters: nil,encoding: JSONParameterEncoders.default, headers: header).responseJSON{ response in
+        let header = ["Content-Type": "application/json"]
+        
+       let url = URL(string:"https://ed40-2406-7400-63-33d0-1c59-753c-e183-52c4.ngrok.io/users/1")!
+        
+        let param = [
+            "first name": "nagarjuna",
+            "last name": "kmj",
+            "subjectId": 2,
+            "id": 1
+
+        ] as [String:Any]
+       sessionManager.request(url,method: .put,parameters: param,encoding: JSONParameterEncoders.default, headers: header).responseJSON{ response in
             switch response{
             case .success(let data):
                 self.responseHandlerDelegate.fetchModel(type: type, data: data){ response in

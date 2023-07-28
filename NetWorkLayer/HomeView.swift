@@ -37,7 +37,7 @@ extension HomeView:UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! CustomCell
       
-        cell.lblLanguageName.text = viewModel.language[indexPath.row].langName
+        cell.lblLanguageName.text = viewModel.language[indexPath.row].firstName
         return cell
     }
 }
