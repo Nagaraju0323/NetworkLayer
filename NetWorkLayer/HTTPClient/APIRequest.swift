@@ -63,10 +63,10 @@ class HTTPClient {
 
 //        ] as [String:Any]
         
-        let encoding = EncodingMethods.URLEncoder.defaults
+        let encodingMethod = EncodingMethods.URLEncoder == encoding ? EncodingMethods.URLEncoder.defaults : EncodingMethods.JSONParameterEncoder.defaults
         
         
-        sessionManager.request(url,method: .get,parameters: param,encoding:encoding, headers: header).responseJSON{ response in
+        sessionManager.request(url,method: .get,parameters: param,encoding:encodingMethod, headers: header).responseJSON{ response in
             switch response{
             case .success(let data):
                 self.responseHandlerDelegate.fetchModel(type: type, data: data){ response in

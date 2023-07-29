@@ -22,21 +22,21 @@ enum EncodingMethods {
     case URLEncoder
     var defaults: ParameterEncoders {
         self == EncodingMethods.JSONParameterEncoder ?
-                JSONParameterEncoders.default:URLEncoding.default
+        JSONParameterEncoders.default:URLEncoding.default
     }
 }
 
-var JSONParameterEncoder: ParameterEncoders {
-    get {
-        return JSONParameterEncoders.default
-    }
-}
-
-var URLEncoder: ParameterEncoders {
-    get {
-        return URLEncoding.default
-    }
-}
+//var JSONParameterEncoder: ParameterEncoders {
+//    get {
+//        return JSONParameterEncoders.default
+//    }
+//}
+//
+//var URLEncoder: ParameterEncoders {
+//    get {
+//        return URLEncoding.default
+//    }
+//}
 
 public protocol ParameterEncoders {
     func encode(urlRequest: inout URLRequest, with parameters: Parameters?) throws -> URLRequest
