@@ -48,25 +48,77 @@ import Foundation
 //}
 
 
-
-struct Languges: Codable {
-    let data: [Datum]
-    let meta: Meta
-}
+//
+//struct Languges: Codable {
+//    let data: [Datum]
+//    let meta: Meta
+//}
 
 // MARK: - Datum
-struct Datum: Codable {
-    let userID, elementID, isLiked, likes: String
+//struct Datum: Codable {
+//    let userID, elementID, isLiked, likes: String
+//
+//    enum CodingKeys: String, CodingKey {
+//        case userID = "user_id"
+//        case elementID = "element_id"
+//        case isLiked = "is_liked"
+//        case likes
+//    }
+//}
+//
+//// MARK: - Meta
+//struct Meta: Codable {
+//    let status, message: String
+//}
 
-    enum CodingKeys: String, CodingKey {
-        case userID = "user_id"
-        case elementID = "element_id"
-        case isLiked = "is_liked"
-        case likes
-    }
+
+
+// This file was generated from JSON Schema using quicktype, do not modify it directly.
+// To parse the JSON, add this file to your project and do:
+//
+//   let welcome = try? JSONDecoder().decode(Welcome.self, from: jsonData)
+
+import Foundation
+
+// MARK: - Welcome
+struct Languges: Codable {
+    let quotes: Quotes
+    let meta: Meta
 }
 
 // MARK: - Meta
 struct Meta: Codable {
-    let status, message: String
+    let status, currentPage, perPage, message: String
+
+    enum CodingKeys: String, CodingKey {
+        case status
+        case currentPage = "current_page"
+        case perPage = "per_page"
+        case message
+    }
+}
+
+// MARK: - Quotes
+struct Quotes: Codable {
+    let totalQuotes: Int
+    let quotes: [Quote]
+
+    enum CodingKeys: String, CodingKey {
+        case totalQuotes = "total_quotes"
+        case quotes
+    }
+}
+
+// MARK: - Quote
+struct Quote: Codable {
+    let quotesID, authorName, quoteDesc, createdAt: String
+    let statusID: String
+
+    enum CodingKeys: String, CodingKey {
+        case quotesID = "quotes_id"
+        case authorName = "author_name"
+        case quoteDesc = "quote_desc"
+        case createdAt = "created_at"
+        case statusID = "status_id"
+    }
 }

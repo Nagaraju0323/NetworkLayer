@@ -22,8 +22,23 @@ import Combine
 
 var resultURLRequest:URLRequest?
 
+
+
 open class SessionManager {
     
+    
+//    static var JSONParameterEncoder: ParameterEncoders {
+//        get {
+//            return JSONParameterEncoders.default
+//        }
+//    }
+//    
+//    static var URLEncoder: ParameterEncoders {
+//        get {
+//            return URLEncoding.default
+//        }
+//    }
+   
     var originalRequest: URLRequest?
     @discardableResult
     open func request(_ url: URLConvertibles,method: HTTPMethods = .get,parameters: Parameters? = nil,encoding: ParameterEncoders = URLEncoding.default,
