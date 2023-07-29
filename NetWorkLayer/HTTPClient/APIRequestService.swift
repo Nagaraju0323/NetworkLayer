@@ -27,7 +27,7 @@ class LanguagesViewModel {
     public typealias Result = Results
     
     func load(completion:@escaping(Result) -> Void) {
-        apiRequest.get(url: URL(string:"https://sevenchats.com/auth/languages")!, type:Languges.self,method:.get, completion: {  [weak self] response in
+        apiRequest.get(url: URL(string:"https://sevenchats.com/admin/quotes/all")!, type:Languges.self,method:.get, encoding: EncodingMethods.URLEncoder, completion: {  [weak self] response in
             guard self != nil else { return}
             DispatchQueue.main.async {
                 switch(response){

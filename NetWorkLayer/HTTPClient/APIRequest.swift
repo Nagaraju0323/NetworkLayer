@@ -22,13 +22,13 @@ public enum ErrorHandling:Swift.Error{
 }
 
 protocol APIRequest {
-    func get(url: URL,type: Languges.Type,method:HTTPMethods,completion:@escaping(Result<Languges,ErrorHandling>) -> Void)
+    func get(url: URL,type: Languges.Type,method:HTTPMethods,encoding:EncodingMethods,completion:@escaping(Result<Languges,ErrorHandling>) -> Void)
 }
 
 class APIRequestService:APIRequest{
-    
-    func get(url: URL,type: Languges.Type,method:HTTPMethods,completion:@escaping(Result<Languges,ErrorHandling>) -> Void){
-        HTTPClient().get(url: url, type: type.self, method: method, completion: completion)
+
+    func get(url: URL,type: Languges.Type,method:HTTPMethods,encoding:EncodingMethods,completion:@escaping(Result<Languges,ErrorHandling>) -> Void){
+        HTTPClient().get(url: url, type: type.self, method: method, encoding: encoding, completion: completion)
     }
     
 }
@@ -37,21 +37,18 @@ class APIRequestService:APIRequest{
 class HTTPClient {
     
     var sessionManager = SessionManager()
-    var responseHandlerDelegate : ResponseHandlerDelegate
+    var responseHandlerDelegate : ResponseHandler_Delegate
     
-    init(sessionManager:SessionManager = SessionManager(),responseHandlerDelegate:ResponseHandlerDelegate = ResponseHandler()) {
+    init(sessionManager:SessionManager = SessionManager(),responseHandlerDelegate:ResponseHandler_Delegate = Response_Handler()) {
         self.sessionManager = sessionManager
         self.responseHandlerDelegate = responseHandlerDelegate
     }
     var urlRequest: URL?
-    func get<T:Codable>(url: URL,type: T.Type,method:HTTPMethods,completion:@escaping(Result<T,ErrorHandling>) -> Void) {
+    func get<T:Codable>(url: URL,type: T.Type,method:HTTPMethods,encoding:EncodingMethods,completion:@escaping(Result<T,ErrorHandling>) -> Void) {
         urlRequest = url
 //        let header = ["Content-Type": "application/json"]
         
         let header =  ["Authorization" : "Bearer 8ef277524a20db15131494936c2fdd0fb6c41e5a","Content-Type" : "application/json", "Accept-Language" :"en", "language":"14897296","Accept" : "application/json"]
-        
-       let url = URL(string:"https://sevenchats.com/admin/quotes/all")!
-        
         let param = [
             "limit":7,
             "page":1
@@ -88,11 +85,11 @@ class HTTPClient {
     }
 }
 
-protocol ResponseHandlerDelegate {
+protocol ResponseHandler_Delegate {
     func fetchModel<T: Codable>(type: T.Type, data: Data, completion: (Result<T, ErrorHandling>) -> Void)
 }
 
-class ResponseHandler: ResponseHandlerDelegate {
+class Response_Handler: ResponseHandler_Delegate {
     func fetchModel<T: Codable>(type: T.Type, data: Data, completion: (Result<T, ErrorHandling>) -> Void) {
         let commentResponse = try? JSONDecoder().decode(type.self, from: data)
         if let commentResponse = commentResponse {
