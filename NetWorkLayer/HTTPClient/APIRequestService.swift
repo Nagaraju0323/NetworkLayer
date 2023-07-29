@@ -23,7 +23,7 @@ class LanguagesViewModel {
         self.apiRequest = apiRequest
     }
  
-    var language = [Languges]()
+    var language = [Datum]()
     
     public typealias Result = Results
    
@@ -36,7 +36,7 @@ class LanguagesViewModel {
             DispatchQueue.main.async {
                 switch(response){
                 case .success(let data):
-                    self?.language  = [data]
+                    self?.language  = data.data
                     completion(.successMsg([data]))
                 case .failure(let error):
                     let result =  (error == ErrorHandling.InvalidData) ? completion(.failures(.InvalidData)) : completion(.failures(.Connectivity))

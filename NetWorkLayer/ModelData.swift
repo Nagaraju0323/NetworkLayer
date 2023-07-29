@@ -34,15 +34,39 @@ import Foundation
 //    let status, message: String
 //}
 
+//
+//struct Languges: Codable {
+//    let firstName, lastName: String
+//    let subjectID, id: Int
+//
+//    enum CodingKeys: String, CodingKey {
+//        case firstName = "first name"
+//        case lastName = "last name"
+//        case subjectID = "subjectId"
+//        case id
+//    }
+//}
+
+
 
 struct Languges: Codable {
-    let firstName, lastName: String
-    let subjectID, id: Int
+    let data: [Datum]
+    let meta: Meta
+}
+
+// MARK: - Datum
+struct Datum: Codable {
+    let userID, elementID, isLiked, likes: String
 
     enum CodingKeys: String, CodingKey {
-        case firstName = "first name"
-        case lastName = "last name"
-        case subjectID = "subjectId"
-        case id
+        case userID = "user_id"
+        case elementID = "element_id"
+        case isLiked = "is_liked"
+        case likes
     }
+}
+
+// MARK: - Meta
+struct Meta: Codable {
+    let status, message: String
 }
