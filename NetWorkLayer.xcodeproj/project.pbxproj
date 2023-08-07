@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		E6250AC32A69B26200BA86A0 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6250AC22A69B26200BA86A0 /* HomeView.swift */; };
-		E627EC652A72E80F00F88883 /* NetWorkLayer.xctestplan in Resources */ = {isa = PBXBuildFile; fileRef = E627EC642A72E80F00F88883 /* NetWorkLayer.xctestplan */; };
 		E627EC692A72F54000F88883 /* MemoryLeak.swift in Sources */ = {isa = PBXBuildFile; fileRef = E627EC682A72F54000F88883 /* MemoryLeak.swift */; };
 		E65BF6332A5B2B83003A233A /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65BF6322A5B2B83003A233A /* HTTPMethod.swift */; };
 		E66F41A32A534AFC00806270 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66F41A22A534AFC00806270 /* AppDelegate.swift */; };
@@ -48,7 +47,6 @@
 
 /* Begin PBXFileReference section */
 		E6250AC22A69B26200BA86A0 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
-		E627EC642A72E80F00F88883 /* NetWorkLayer.xctestplan */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = NetWorkLayer.xctestplan; sourceTree = "<group>"; };
 		E627EC682A72F54000F88883 /* MemoryLeak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryLeak.swift; sourceTree = "<group>"; };
 		E65BF6322A5B2B83003A233A /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
 		E66F419F2A534AFC00806270 /* NetWorkLayer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NetWorkLayer.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -153,7 +151,6 @@
 				E66F41B92A534AFE00806270 /* NetWorkLayerTests.swift */,
 				E627EC682A72F54000F88883 /* MemoryLeak.swift */,
 				E66F41D42A534B5500806270 /* TestCasesNetwork.swift */,
-				E627EC642A72E80F00F88883 /* NetWorkLayer.xctestplan */,
 			);
 			path = NetWorkLayerTests;
 			sourceTree = "<group>";
@@ -282,7 +279,6 @@
 			files = (
 				E66F41AF2A534AFD00806270 /* LaunchScreen.storyboard in Resources */,
 				E66F41AC2A534AFD00806270 /* Assets.xcassets in Resources */,
-				E627EC652A72E80F00F88883 /* NetWorkLayer.xctestplan in Resources */,
 				E66F41AA2A534AFC00806270 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

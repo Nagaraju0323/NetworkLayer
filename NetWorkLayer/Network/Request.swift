@@ -22,22 +22,7 @@ import Combine
 
 var resultURLRequest:URLRequest?
 
-
-
 open class SessionManager {
-    
-    
-//    static var JSONParameterEncoder: ParameterEncoders {
-//        get {
-//            return JSONParameterEncoders.default
-//        }
-//    }
-//    
-//    static var URLEncoder: ParameterEncoders {
-//        get {
-//            return URLEncoding.default
-//        }
-//    }
    
     var originalRequest: URLRequest?
     @discardableResult

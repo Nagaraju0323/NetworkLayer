@@ -6,33 +6,33 @@
 //
 
 import Foundation
-//struct Languges: Codable {
-//    let data: [Datum]
-//    let meta: Meta
-//}
-//
-////// MARK: - Datum
-//struct Datum: Codable,Equatable {
-//    let langID, langName, langCode, orientation: String
-//    let statusID: String
-//
-//    enum CodingKeys: String, CodingKey {
-//        case langID = "lang_id"
-//        case langName = "lang_name"
-//        case langCode = "lang_code"
-//        case orientation = "orientation"
-//        case statusID = "status_id"
-//    }
-//    
-//    var DatumItems:Datum{
-//        return Datum(langID: langID, langName:langName , langCode: langCode, orientation: orientation, statusID: statusID)
-//    }
-//}
-//
-////// MARK: - Meta
-//struct Meta: Codable {
-//    let status, message: String
-//}
+struct Languges: Codable {
+    let data: [Datum]
+    let meta: Meta
+}
+
+//// MARK: - Datum
+struct Datum: Codable,Equatable {
+    let langID, langName, langCode, orientation: String
+    let statusID: String
+
+    enum CodingKeys: String, CodingKey {
+        case langID = "lang_id"
+        case langName = "lang_name"
+        case langCode = "lang_code"
+        case orientation = "orientation"
+        case statusID = "status_id"
+    }
+    
+    var DatumItems:Datum{
+        return Datum(langID: langID, langName:langName , langCode: langCode, orientation: orientation, statusID: statusID)
+    }
+}
+
+//// MARK: - Meta
+struct Meta: Codable {
+    let status, message: String
+}
 
 //
 //struct Languges: Codable {
@@ -47,14 +47,14 @@ import Foundation
 //    }
 //}
 
-
 //
+////
 //struct Languges: Codable {
 //    let data: [Datum]
 //    let meta: Meta
 //}
-
-// MARK: - Datum
+//
+//// MARK: - Datum
 //struct Datum: Codable {
 //    let userID, elementID, isLiked, likes: String
 //
@@ -80,45 +80,45 @@ import Foundation
 
 import Foundation
 
-// MARK: - Welcome
-struct Languges: Codable {
-    let quotes: Quotes
-    let meta: Meta
-}
-
-// MARK: - Meta
-struct Meta: Codable {
-    let status, currentPage, perPage, message: String
-
-    enum CodingKeys: String, CodingKey {
-        case status
-        case currentPage = "current_page"
-        case perPage = "per_page"
-        case message
-    }
-}
-
-// MARK: - Quotes
-struct Quotes: Codable {
-    let totalQuotes: Int
-    let quotes: [Quote]
-
-    enum CodingKeys: String, CodingKey {
-        case totalQuotes = "total_quotes"
-        case quotes
-    }
-}
-
-// MARK: - Quote
-struct Quote: Codable {
-    let quotesID, authorName, quoteDesc, createdAt: String
-    let statusID: String
-
-    enum CodingKeys: String, CodingKey {
-        case quotesID = "quotes_id"
-        case authorName = "author_name"
-        case quoteDesc = "quote_desc"
-        case createdAt = "created_at"
-        case statusID = "status_id"
-    }
-}
+//// MARK: - Welcome
+//struct Languges: Codable {
+//    let quotes: Quotes
+//    let meta: Meta
+//}
+//
+//// MARK: - Meta
+//struct Meta: Codable {
+//    let status, currentPage, perPage, message: String
+//
+//    enum CodingKeys: String, CodingKey {
+//        case status
+//        case currentPage = "current_page"
+//        case perPage = "per_page"
+//        case message
+//    }
+//}
+//
+//// MARK: - Quotes
+//struct Quotes: Codable {
+//    let totalQuotes: Int
+//    let quotes: [Quote]
+//
+//    enum CodingKeys: String, CodingKey {
+//        case totalQuotes = "total_quotes"
+//        case quotes
+//    }
+//}
+//
+//// MARK: - Quote
+//struct Quote: Codable {
+//    let quotesID, authorName, quoteDesc, createdAt: String
+//    let statusID: String
+//
+//    enum CodingKeys: String, CodingKey {
+//        case quotesID = "quotes_id"
+//        case authorName = "author_name"
+//        case quoteDesc = "quote_desc"
+//        case createdAt = "created_at"
+//        case statusID = "status_id"
+//    }
+//}

@@ -26,26 +26,13 @@ enum EncodingMethods {
     }
 }
 
-//var JSONParameterEncoder: ParameterEncoders {
-//    get {
-//        return JSONParameterEncoders.default
-//    }
-//}
-//
-//var URLEncoder: ParameterEncoders {
-//    get {
-//        return URLEncoding.default
-//    }
-//}
 
 public protocol ParameterEncoders {
     func encode(urlRequest: inout URLRequest, with parameters: Parameters?) throws -> URLRequest
 }
 
 public struct URLEncoding: ParameterEncoders {
-    
-    
-    
+     
     public static var `default`: URLEncoding { return URLEncoding() }
     public func encode(urlRequest: inout URLRequest, with parameters: Parameters?) throws -> URLRequest {
         

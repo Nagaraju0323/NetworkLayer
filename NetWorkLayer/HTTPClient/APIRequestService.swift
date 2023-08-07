@@ -9,7 +9,7 @@ import Foundation
 
 
 enum Results {
-    case successMsg([Languges])
+    case successMsg([Datum])
     case failures(ErrorHandling)
 }
 
@@ -22,18 +22,18 @@ class LanguagesViewModel {
         self.apiRequest = apiRequest
     }
     
-    var language = [Quote]()
+    var language = [Datum]()
     
     public typealias Result = Results
     
     func load(completion:@escaping(Result) -> Void) {
-        apiRequest.get(url: URL(string:"https://sevenchats.com/admin/quotes/all")!, type:Languges.self,method:.get, encoding: EncodingMethods.URLEncoder, completion: {  [weak self] response in
+        apiRequest.get(url: URL(string:"https://sevenchats.com/auth/languages")!, type:Languges.self,method:.get, encoding: EncodingMethods.JSONParameterEncoder, completion: {  [weak self] response in
             guard self != nil else { return}
             DispatchQueue.main.async {
                 switch(response){
                 case .success(let data):
-                    self?.language  = data.quotes.quotes
-                    completion(.successMsg([data]))
+                    self?.language  = data.data
+                    completion(.successMsg(data.data))
                 case .failure(let error):
                     let result =  (error == ErrorHandling.InvalidData) ? completion(.failures(.InvalidData)) : completion(.failures(.Connectivity))
                 }

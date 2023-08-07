@@ -10,10 +10,6 @@
  */
 
 import Foundation
-
-// protocol DataRequest {
-//     func respHandler(completion:@escaping(Result<Data,ErrorHandling>) -> Void)
-//}
 /**
  * Used for Json Serilization
  * - parameter Data:Convert to Response to Data
@@ -22,18 +18,18 @@ import Foundation
 
 extension URLRequestConvertible {
     
-    func responseJSON(completion:@escaping(Result<Data,ErrorHandling>) -> Void){
+    func responseJSON(completion:@escaping(Result<Data,ErrorHandling>) -> Void) {
         guard let urlRequest = resultURLRequest else { return }
         URLSession.shared.dataTask(with: urlRequest, completionHandler: { data,response,error in
             if let httpResponse = response as? HTTPURLResponse {
                 
-                switch (httpResponse.statusCode){
+                switch (httpResponse.statusCode) {
                 case 500..<600:
                     completion(.failure(.ServicerErrorBadGateway))
                 case 200:
                     guard let data = data,error == nil  else { return completion(.failure(.noData)) }
                     completion(.success(data))
-                case 401,400:
+                case 400..<499:
                     completion(.failure(.BadRequest))
                 case 201:
                     do{
