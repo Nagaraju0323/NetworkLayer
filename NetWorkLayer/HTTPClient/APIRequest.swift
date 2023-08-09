@@ -66,7 +66,8 @@ class HTTPClient {
                     }
                 }
             case .failure(let error):
-                print(error)
+               
+                print("response Error\(error)")
             }
         }
         

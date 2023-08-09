@@ -34,7 +34,6 @@ extension URLRequestConvertible {
                 case 201:
                     do{
                         let jsonAsData = try? JSONSerialization.jsonObject(with: data!, options: []) as? [String:AnyObject]
-                        print(jsonAsData)
                     }catch{
                         print("Errohadling")
                     }
