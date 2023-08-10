@@ -6,10 +6,10 @@
 //
 
 import Foundation
-struct Languges: Codable {
-    let data: [Datum]
-    let meta: Meta
-}
+//struct Languges: Codable {
+//    let data: [Datum]
+//    let meta: Meta
+//}
 
 //// MARK: - Datum
 struct Datum: Codable,Equatable {
@@ -122,3 +122,15 @@ import Foundation
 //        case statusID = "status_id"
 //    }
 //}
+
+
+struct Languges: Codable {
+    let tokenType, accessToken: String
+    let expiresIn: Int
+
+    enum CodingKeys: String, CodingKey {
+        case tokenType = "token_type"
+        case accessToken = "access_token"
+        case expiresIn = "expires_in"
+    }
+}

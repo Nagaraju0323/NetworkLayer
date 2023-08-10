@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E61AF5452A85583C004D2AB9 /* URLencodedinUrl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E61AF5442A85583C004D2AB9 /* URLencodedinUrl.swift */; };
 		E6250AC32A69B26200BA86A0 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6250AC22A69B26200BA86A0 /* HomeView.swift */; };
 		E627EC692A72F54000F88883 /* MemoryLeak.swift in Sources */ = {isa = PBXBuildFile; fileRef = E627EC682A72F54000F88883 /* MemoryLeak.swift */; };
 		E65BF6332A5B2B83003A233A /* HTTPMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = E65BF6322A5B2B83003A233A /* HTTPMethod.swift */; };
@@ -48,6 +49,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E61AF5442A85583C004D2AB9 /* URLencodedinUrl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLencodedinUrl.swift; sourceTree = "<group>"; };
 		E6250AC22A69B26200BA86A0 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		E627EC682A72F54000F88883 /* MemoryLeak.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemoryLeak.swift; sourceTree = "<group>"; };
 		E65BF6322A5B2B83003A233A /* HTTPMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HTTPMethod.swift; sourceTree = "<group>"; };
@@ -106,6 +108,7 @@
 				E65BF6322A5B2B83003A233A /* HTTPMethod.swift */,
 				E6E2C2052A6445D800F929FD /* Request.swift */,
 				E67429C42A5C8ABF0079374D /* ParameterEncoding.swift */,
+				E61AF5442A85583C004D2AB9 /* URLencodedinUrl.swift */,
 				E67429C22A5C85FF0079374D /* URLConvertible.swift */,
 				E6B6EB492A685C64002605D0 /* JsonSerialization.swift */,
 			);
@@ -317,6 +320,7 @@
 				E67429C52A5C8AC00079374D /* ParameterEncoding.swift in Sources */,
 				E65BF6332A5B2B83003A233A /* HTTPMethod.swift in Sources */,
 				E66F41D72A534D8B00806270 /* APIRequestService.swift in Sources */,
+				E61AF5452A85583C004D2AB9 /* URLencodedinUrl.swift in Sources */,
 				E6BE02412A83992500483B91 /* URLSessionClient.swift in Sources */,
 				E66F41A52A534AFC00806270 /* SceneDelegate.swift in Sources */,
 				E6250AC32A69B26200BA86A0 /* HomeView.swift in Sources */,

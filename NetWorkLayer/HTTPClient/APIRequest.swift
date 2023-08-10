@@ -38,23 +38,31 @@ class HTTPClient {
     
     var sessionManager = SessionManager()
     var responseHandlerDelegate : ResponseHandler_Delegate
+    var urlEncodingDelegate : selectURLEncodingDelegate
     
-    init(sessionManager:SessionManager = SessionManager(),responseHandlerDelegate:ResponseHandler_Delegate = Response_Handler()) {
+    init(sessionManager:SessionManager = SessionManager(),responseHandlerDelegate:ResponseHandler_Delegate = Response_Handler(),urlEncodingDelegate:selectURLEncodingDelegate = URLEncodingType()) {
         self.sessionManager = sessionManager
         self.responseHandlerDelegate = responseHandlerDelegate
+        self.urlEncodingDelegate = urlEncodingDelegate
     }
     var urlRequest: URL?
     func get<T:Codable>(url: URL,type: T.Type,param:[String:Any] = [:],method:HTTPMethods,encoding:EncodingMethods,completion:@escaping(Result<T,ErrorHandling>) -> Void) {
      
         urlRequest = url
 
-        let header =  ["Authorization" : "Bearer 8ef277524a20db15131494936c2fdd0fb6c41e5a","Content-Type" : "application/json", "Accept-Language" :"en", "language":"14897296","Accept" : "application/json"]
-        let param = [String:Any]()
-            
+        let header =  ["Authorization" : "Bearer a57e4291e388d6c42cab70875b08750e6ec7755f","Content-Type" : "application/json", "Accept-Language" :"en", "language":"14897296","Accept" : "application/json"]
+//        let param = []()
+        let param:[String:Any] = [
+            "username" : "mithra.r2021@gmail.com",
+            "password" : "admin@123",
+            "grant_type" : "password",
+            "client_id" : "null",
+            "client_secret": "null"
+        ]
 
-        let encodingMethod = EncodingMethods.URLEncoder == encoding ? EncodingMethods.URLEncoder.defaults : EncodingMethods.JSONParameterEncoder.defaults
-
-        sessionManager.request(url,method: .get,parameters: param.isEmpty ? nil : param,encoding:encodingMethod, headers: header).responseJSON{ response in
+        let encodingMethod = urlEncodingDelegate.encodingType(encodingMethod: encoding)
+   
+        sessionManager.request(url,method: method,parameters: param.isEmpty ? nil : param,encoding:encodingMethod, headers: header).responseJSON{ response in
             switch response{
             case .success(let data):
                 self.responseHandlerDelegate.fetchModel(type: type, data: data){ response in
@@ -90,3 +98,23 @@ class Response_Handler: ResponseHandler_Delegate {
     
 }
 
+
+//public protocol selectURLEncodingDelegate {
+//    func encodingType(encodingMethod: EncodingMethods) -> ParameterEncoders
+//}
+//
+//public class URLEncodingType: selectURLEncodingDelegate {
+//    func encodingType(encodingMethod encodingMethodType: EncodingMethods) -> ParameterEncoders{
+//        let encodingMethod : ParameterEncoders
+//        switch encodingMethodType{
+//        case EncodingMethods.URLEncoder :
+//            encodingMethod = EncodingMethods.URLEncoder.defaults
+//        case EncodingMethods.JSONParameterEncoder:
+//            encodingMethod = EncodingMethods.JSONParameterEncoder.defaults
+//        case EncodingMethods.URLEncodedFormEncoder:
+//            encodingMethod = EncodingMethods.URLEncodedFormEncoder.defaults
+//        }
+//        return encodingMethod
+//    }
+//    
+//}

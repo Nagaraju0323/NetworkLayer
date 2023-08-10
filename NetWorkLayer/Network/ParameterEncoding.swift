@@ -20,10 +20,20 @@ public typealias Parameters = [String:Any]
 enum EncodingMethods {
     case JSONParameterEncoder
     case URLEncoder
+    case URLEncodedFormEncoder
+    
     var defaults: ParameterEncoders {
-        self == EncodingMethods.JSONParameterEncoder ?
-        JSONParameterEncoders.default:URLEncoding.default
-    }
+//        self == EncodingMethods.JSONParameterEncoder ?
+//        JSONParameterEncoders.default:URLEncoding.default
+        if self == EncodingMethods.JSONParameterEncoder{
+            return JSONParameterEncoders.default
+        }else if self == EncodingMethods.URLEncoder{
+            return URLEncoding.default
+        }else {
+            return URLencodedinUrl.default
+        }
+       
+   }
 }
 
 
@@ -40,7 +50,7 @@ public struct URLEncoding: ParameterEncoders {
         guard let url = urlRequest.url else { throw NetworkError.missingURL }
         if var urlComponents = URLComponents(url: url,
                                              resolvingAgainstBaseURL: false), !parameters.isEmpty {
-            
+
             urlComponents.queryItems = [URLQueryItem]()
             for (key,value) in parameters {
                 let queryItem = URLQueryItem(name: key,
@@ -48,15 +58,21 @@ public struct URLEncoding: ParameterEncoders {
                 urlComponents.queryItems?.append(queryItem)
             }
             urlRequest.url = urlComponents.url
+           
         }
+        
         
         if urlRequest.value(forHTTPHeaderField: "Content-Type") == nil {
             urlRequest.setValue("application/x-www-form-urlencoded; charset=utf-8", forHTTPHeaderField: "Content-Type")
         }
+      
         return urlRequest
     }
     
 }
+
+
+
 
 public struct JSONParameterEncoders: ParameterEncoders {
     
@@ -70,12 +86,11 @@ public struct JSONParameterEncoders: ParameterEncoders {
                 urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
             }
             return urlRequest
-        }catch {
+        }catch(_) {
             throw NetworkError.encodingFailed
         }
     }
 }
-
 /**
  * Used for NetworkError
  * - parameter Error: handling all Error Shwo Failiure cases
@@ -85,3 +100,9 @@ public enum NetworkError : String, Error {
     case encodingFailed = "Parameter encoding failed."
     case missingURL = "URL is nil."
 }
+
+
+//MARK: URL encoding Method
+
+
+
