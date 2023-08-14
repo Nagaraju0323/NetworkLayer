@@ -41,6 +41,7 @@ final class NetWorkLayerTests: XCTestCase {
         let client = HTTPClient()
         let loader = LanguagesViewModel(apiRequest: APIRequestService())
         let exp = expectation(description: "wait For load completion")
+        exp.expectedFulfillmentCount = 2
         var resciviedResult : Results?
         trackForMemoryLeaks(client, file: file, line: line)
         trackForMemoryLeaks(loader, file: file, line: line)
@@ -49,7 +50,7 @@ final class NetWorkLayerTests: XCTestCase {
             resciviedResult = result
             exp.fulfill()
         }
-        wait(for: [exp],timeout: 5.0)
+        wait(for: [exp],timeout: 1.0)
         
         return resciviedResult
         

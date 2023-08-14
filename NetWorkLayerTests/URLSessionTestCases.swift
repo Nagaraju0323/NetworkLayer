@@ -88,6 +88,7 @@ class URLProtocolStub: URLProtocol {
     
     override func startLoading() {
         
+        
         guard let stub = URLProtocolStub.stub else { return }
         
         if let data = stub.data {
