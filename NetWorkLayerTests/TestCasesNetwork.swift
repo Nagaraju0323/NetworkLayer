@@ -100,6 +100,7 @@ final class TestCasesNetwork: XCTestCase {
         let items = [item1.model,item2.model]
         expect(sut: sut, toCompleteWitherro: .successMsg(items), when: {
             let jsonData = makeItemsLoadJSON([item1.json,item2.json])
+            print("jsondata......\(jsonData)")
             client.createWithStatus(withStatus: 200,data: jsonData)
         })
     }
@@ -117,6 +118,7 @@ final class TestCasesNetwork: XCTestCase {
             acc[e.key] = value
           
         }
+        print("json........\(json)")
         return (item,json)
         
         
@@ -206,7 +208,7 @@ final class TestCasesNetwork: XCTestCase {
                 let jsonModel = try JSONDecoder().decode(Languges.self, from: data)
                 print(jsonModel)
                 message[Index].completion(.success(jsonModel))
-            }catch(let error){
+            }catch(_){
                 message[Index].completion(.failure(.InvalidData))
             }
         }
