@@ -20,3 +20,4 @@ Key components and functionalities of a network layer in Swift:
 8. Security: The network layer also plays a role in implementing security measures, such as adding authentication tokens or handling secure communication with SSL/TLS.
 
 By implementing a well-structured network layer, developers can ensure that network-related code is organized, modular, and maintainable. It promotes code reusability, reduces duplication, and makes it easier to adopt changes or switch to a different networking library if needed. Additionally, a robust network layer helps in creating a more responsive and reliable user experience by handling network-related scenarios effectively.
+# NetworkLayer
